@@ -1,0 +1,15 @@
+
+wget https://github.com/a1ive/grub/archive/refs/heads/master.zip
+unzip master.zip
+cd grub-master/
+
+apt-get update
+apt-get install gcc make autoconf automake bison flex libdevmapper-dev libzfslinux-dev liblzma-dev binutils gettext unifont xz-utils libfreetype-dev libfreetype6-dev autopoint libtool-bin libtool pkg-config git
+
+./bootstrap
+./configure --target=x86_64  --with-platform=efi
+make
+make install
+
+cd grub-core
+../grub-mkimage -O x86_64-efi -p "(hd0,gpt1)/EFI/ubuntu" -o grubx64.efi part_gpt probe part_msdos linux16 ntfs ntfscomp hfsplus fat exfat xzio ext2 normal chain boot configfile linux efi_uga loopback gfxterm videoinfo ls file efi_gop all_video video video_fb loadenv help reboot raid6rec raid5rec mdraid1x mdraid09 lvm diskfilter zfsinfo zfscrypt gcry_rijndael gcry_sha1 zfs true test sleep search search_fs_uuid search_fs_file search_label png password_pbkdf2 gcry_sha512 pbkdf2 part_apple minicmd memdisk lssal lsefisystab lsefimmap lsefi disk keystatus jpeg iso9660 halt gfxterm_background gfxmenu trig bitmap_scale video_colors bitmap font fshelp echo terminal gettext efinet net priority_queue datetime bufio cat btrfs gzio lzopio crypto acpi extcmd mmap ntfs
